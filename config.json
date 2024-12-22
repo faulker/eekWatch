@@ -1,0 +1,22 @@
+{
+  "debug": false,
+  "rules": {
+    "location": "rules"
+  },
+  "alerts": {
+    "email": {
+      "smtp": "",
+      "user": "",
+      "password": "",
+      "from_address": ""
+    },
+    "logging": {
+      "location": "/var/log",
+      "file": "eekwatch.log",
+      "rotation": {
+        "when": "size",
+        "limit": "100"
+      }
+    }
+  }
+}

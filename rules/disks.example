@@ -1,0 +1,27 @@
+{
+  "name": "disks",
+  "description": "Check if disks are filling up",
+  "rule_type": "disk",
+  "rules": [
+    {
+      "alert": {
+        "alert_type": "email",
+        "contacts": [
+          "<your-email>"
+        ]
+      },
+      "logic": [
+        {
+          "disk": "/",
+          "option": "free",
+          "limit": "10GB"
+        },
+        {
+          "disk": "/System/Volumes/Data",
+          "option": "used",
+          "limit": "99%"
+        }
+      ]
+    }
+  ]
+}
