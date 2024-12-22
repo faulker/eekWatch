@@ -4,6 +4,11 @@ on:
   release:
     types: [ created ]
 
+env:
+  CRATE_NAME: eekWatch
+  GITHUB_TOKEN: ${{ github.token }}
+  RUST_BACKTRACE: 1
+
 jobs:
   release:
     name: Release - ${{ matrix.platform.os-name }}
