@@ -2,6 +2,11 @@
 name = "eekwatch"
 version = "0.1.0"
 edition = "2021"
+authors = ["Winter Faulk <winter@faulk.me>"]
+description = "A simple alerting system for monitoring system resources."
+rust-version = "1.81.0"
+repository = "https://github.com/faulker/eekWatch"
+license = "MIT"
 
 [dependencies]
 serde = { version = "^1.0.216", features = ["derive"] }
