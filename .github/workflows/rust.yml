@@ -6,25 +6,102 @@ on:
 
 jobs:
   release:
-    name: release ${{ matrix.target }}
-    runs-on: ubuntu-latest
+    name: Release - ${{ matrix.platform.os-name }}
+    runs-on: ${{ matrix.platform.runs-on }}
     strategy:
-      fail-fast: false
       matrix:
+        platform:
+          - os-name: FreeBSD-x86_64
+            runs-on: ubuntu-20.04
+            target: x86_64-unknown-freebsd
+
+          - os-name: Linux-x86_64
+            runs-on: ubuntu-20.04
+            target: x86_64-unknown-linux-musl
+
+          - os-name: Linux-aarch64
+            runs-on: ubuntu-20.04
+            target: aarch64-unknown-linux-musl
+
+          - os-name: Linux-arm
+            runs-on: ubuntu-20.04
+            target: arm-unknown-linux-musleabi
+
+          - os-name: Linux-i686
+            runs-on: ubuntu-20.04
+            target: i686-unknown-linux-musl
+
+          - os-name: Linux-powerpc
+            runs-on: ubuntu-20.04
+            target: powerpc-unknown-linux-gnu
+
+          - os-name: Linux-powerpc64
+            runs-on: ubuntu-20.04
+            target: powerpc64-unknown-linux-gnu
+
+          - os-name: Linux-powerpc64le
+            runs-on: ubuntu-20.04
+            target: powerpc64le-unknown-linux-gnu
+
+          - os-name: Linux-riscv64
+            runs-on: ubuntu-20.04
+            target: riscv64gc-unknown-linux-gnu
+
+          - os-name: Linux-s390x
+            runs-on: ubuntu-20.04
+            target: s390x-unknown-linux-gnu
+
+          - os-name: NetBSD-x86_64
+            runs-on: ubuntu-20.04
+            target: x86_64-unknown-netbsd
+
+          - os-name: Windows-aarch64
+            runs-on: windows-latest
+            target: aarch64-pc-windows-msvc
+
+          - os-name: Windows-i686
+            runs-on: windows-latest
+            target: i686-pc-windows-msvc
+
+          - os-name: Windows-x86_64
+            runs-on: windows-latest
+            target: x86_64-pc-windows-msvc
+
+          - os-name: macOS-x86_64
+            runs-on: macOS-latest
+            target: x86_64-apple-darwin
+
+          - os-name: macOS-aarch64
+            runs-on: macOS-latest
+            target: aarch64-apple-darwin
+        toolchain:
+          - stable
         include:
-          - target: x86_64-pc-windows-gnu
-            archive: zip
-          - target: x86_64-unknown-linux-musl
-            archive: zip
+          - platform:
+              os-name: Linux-x86_64
+              runs-on: ubuntu-20.04
+              target: x86_64-unknown-linux-musl
+              bin: eekWatch
+            toolchain: stable
+          - platform:
+              os-name: Linux-x86_64
+              runs-on: ubuntu-20.04
+              target: x86_64-unknown-linux-musl
+              bin: eekWatch
+            toolchain: stable
+
     steps:
-      - uses: actions/checkout@master
-      - name: Compile and release
-        uses: rust-build/rust-build.action@v1.4.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TOOLCHAIN_VERSION: 1.81.0
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build binary
+        uses: houseabsolute/actions-rust-cross@v0
         with:
-          RUSTTARGET: ${{ matrix.target }}
-          STATIC_LINKING: false
-          ARCHIVE_TYPES: ${{ matrix.archive }}
-          EXTRA_FILES: "README.md config.json rules/disks.example"
+          command: ${{ matrix.platform.command }}
+          target: ${{ matrix.platform.target }}
+          args: "--locked --release"
+          strip: true
+      - name: Publish artifacts and release
+        uses: houseabsolute/actions-rust-release@v0
+        with:
+          executable-name: eekWatch
+          target: ${{ matrix.platform.target }}
