@@ -54,6 +54,9 @@ jobs:
         if: matrix.feature == 'openssl'
         run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config openssl libssl-dev
 
+      - name: Debug
+        run: sudo apt-file list libssl-dev
+
       # Only install cross if we need it
       # Install via cargo-binstall which I found faster
       - name: Install Cross
