@@ -47,6 +47,10 @@ jobs:
       - name: Setup Cache
         uses: Swatinem/rust-cache@v2
 
+      - name: Install libssl-dev
+        run: |
+          sudo apt-get install libssl-dev
+
       # Only install cross if we need it
       # Install via cargo-binstall which I found faster
       - name: Install Cross
