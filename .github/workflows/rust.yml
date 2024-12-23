@@ -19,24 +19,25 @@ jobs:
       matrix:
         include:
           - name: Linux-amd64
+            #            runner: rust:1.76.0-alpine3.19
             runner: ubuntu-22.04
             target: x86_64-unknown-linux-gnu
             command: cross
             feature: openssl
-          - name: Linux-aarch64
-            runner: ubuntu-22.04
-            target: aarch64-unknown-linux-gnu
-            command: cross
-            feature: openssl
-          - name: Windows-x86_64
-            runner: windows-latest
-            target: x86_64-pc-windows-msvc
-            command: cross
-          - name: FreeBSD-x86_64
-            runner: ubuntu-22.04
-            target: x86_64-unknown-freebsd
-            command: cross
-            feature: openssl
+          #          - name: Linux-aarch64
+          #            runner: ubuntu-22.04
+          #            target: aarch64-unknown-linux-gnu
+          #            command: cross
+          #            feature: openssl
+          #          - name: Windows-x86_64
+          #            runner: windows-latest
+          #            target: x86_64-pc-windows-msvc
+          #            command: cross
+          #          - name: FreeBSD-x86_64
+          #            runner: ubuntu-22.04
+          #            target: x86_64-unknown-freebsd
+          #            command: cross
+          #            feature: openssl
           # cargo
     #          - name: MacOs-aarch64
     #            runner: macOS-latest
@@ -56,11 +57,12 @@ jobs:
 
       - name: Install OpenSSL
         if: matrix.feature == 'openssl'
-        run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config openssl libssl-dev
+        run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config openssl-devel libssl-dev
+      #        run: apk add --no-cache curl clang cmake libxml2-dev openssl-dev musl-fts-dev bsd-compat-headers
 
-      - name: Debug
-        if: matrix.feature == 'openssl'
-        run: openssl version -d && printenv
+      #      - name: Debug
+      #        if: matrix.feature == 'openssl'
+      #        run: openssl version -d && printenv
 
       # Only install cross if we need it
       # Install via cargo-binstall which I found faster
