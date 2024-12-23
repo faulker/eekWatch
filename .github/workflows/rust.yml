@@ -24,7 +24,7 @@ jobs:
             command: cross
           - name: Windows-x86_64
             runner: windows-latest
-            target: x86_64-pc-windows-gnu
+            target: x86_64-pc-windows-msvc
             command: cross
           - name: FreeBSD-x86_64
             runner: ubuntu-latest
