@@ -49,7 +49,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install libssl-dev
-        if: matric.openssl != 'false'
+        if: matrix.openssl != 'false'
         run: |
           sudo apt-get install libssl-dev
 
