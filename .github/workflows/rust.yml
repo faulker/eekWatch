@@ -62,7 +62,8 @@ jobs:
 
       - name: Debug
         if: matrix.feature == 'openssl'
-        run: pkg-config --variable pc_path pkg-config && printenv
+        #        run: pkg-config --variable pc_path pkg-config && printenv
+        run: find / -name openssl.pc
 
       # Only install cross if we need it
       # Install via cargo-binstall which I found faster
