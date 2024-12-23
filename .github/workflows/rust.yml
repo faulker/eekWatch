@@ -10,7 +10,7 @@ env:
   OPENSSL_DIR: /usr/lib/ssl
   OPENSSL_INCLUDE_DIR: /usr/include/openssl
   OPENSSL_LIB_DIR: /usr/lib/x86_64-linux-gnu
-  PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
+  PKG_CONFIG_PATH: /usr/local/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib/ssl/pkgconfig
 
 jobs:
   build:
