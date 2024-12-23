@@ -8,6 +8,7 @@ env:
   CARGO_TERM_COLOR: always
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   OPENSSL_DIR: /usr/include/openssl
+  PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
 
 jobs:
   build:
@@ -54,6 +55,10 @@ jobs:
       - name: Install OpenSSL
         if: matrix.feature == 'openssl'
         run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config openssl libssl-dev
+
+      - name: Debug
+        if: matrix.feature == 'openssl'
+        run: openssl version -d && printenv
 
       # Only install cross if we need it
       # Install via cargo-binstall which I found faster
