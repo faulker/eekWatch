@@ -7,7 +7,7 @@ on: [ push ]
 env:
   CARGO_TERM_COLOR: always
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  OPENSSL_DIR: /usr/include/openssl
+  OPENSSL_DIR: /usr/lib/ssl
   PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
 
 jobs:
@@ -54,7 +54,7 @@ jobs:
 
       - name: Install OpenSSL
         if: matrix.feature == 'openssl'
-        run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config openssl libssl-dev
+        run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config openssl-dev libssl-dev
 
       - name: Debug
         if: matrix.feature == 'openssl'
