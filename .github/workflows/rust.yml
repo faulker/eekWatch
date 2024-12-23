@@ -55,7 +55,7 @@ jobs:
         if: matrix.openssl == 'true'
         shell: bash
         run: |
-          sudo apt-get install libssl-dev
+          sudo apt-get install libssl-dev openssl-dev
 
       # Only install cross if we need it
       # Install via cargo-binstall which I found faster
