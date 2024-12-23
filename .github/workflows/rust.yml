@@ -57,7 +57,7 @@ jobs:
 
       - name: Install OpenSSL
         if: matrix.feature == 'openssl'
-        run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config openssl-devel libssl-dev
+        run: sudo apt-get update --yes && sudo apt-get install --yes pkg-config libssl-dev musl-dev
       #        run: apk add --no-cache curl clang cmake libxml2-dev openssl-dev musl-fts-dev bsd-compat-headers
 
       #      - name: Debug
