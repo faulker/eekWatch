@@ -8,6 +8,8 @@ env:
   CARGO_TERM_COLOR: always
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   OPENSSL_DIR: /usr/lib/ssl
+  OPENSSL_INCLUDE_DIR: /usr/include/openssl
+  OPENSSL_LIB_DIR: /usr/lib/x86_64-linux-gnu
   PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
 
 jobs:
