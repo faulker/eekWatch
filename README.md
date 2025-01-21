@@ -1,3 +1,6 @@
+# ----> THIS IS STILL A WIP <----
+This is only partly working, watching disk space usage and getting email notifications is the only part currently working
+
 # eekWatch
 A application for checking system resources and on failures alerting.
 
